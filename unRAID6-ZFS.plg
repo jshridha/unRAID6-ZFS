@@ -20,6 +20,10 @@
 <CHANGES>
 
 ###2017.01.22
+- Updated to 6.3rc9 (kernel 4.9.6)
+- Use spl and zfs v0.7.0-rc3 for 4.9 kernel support
+
+###2017.01.22
 - Updated to 6.3.rc6 (kernel 4.8.12)
 
 ###2016.11.07
@@ -127,7 +131,7 @@ The native Linux kernel port of the ZFS filesystem.
 
 Allows you to use ZFS format on non Array disks.
 
-* ONLY SUPPORTED ON unRAID 6.1.9 - 6.2.4 (and 6.3.rc3,rc6) *
+* ONLY SUPPORTED ON unRAID 6.1.9 - 6.2.4 (and 6.3.rc3,rc6,rc9) *
 
 </INLINE>
 </FILE>
@@ -300,8 +304,16 @@ download_install() {
   fi
 }
 
+# Version 6.3.rc9
+if [[ $kernel_version == *"4.9.6-unRAID"* ]]; then
+  spl_pkg="spl-0.7.0-rc3-unRAID6.3.rc9.x86_64.tgz"
+  spl_md5="36ea2c4cb9f6c6652184f35870c249dc"
+  zfs_pkg="zfs-0.7.0-rc3-unRAID6.3.rc9.x86_64.tgz"
+  zfs_md5="e78283fed9d50cecc9956226a46f15cb"
+  supported_kernel=true
+
 # Version 6.3.rc6
-if [[ $kernel_version == *"4.8.12-unRAID"* ]]; then
+elif [[ $kernel_version == *"4.8.12-unRAID"* ]]; then
   spl_pkg="spl-0.6.5.8-unRAID6.3.rc6.x86_64.tgz"
   spl_md5="9307f1689041e007881942109ecf4af0"
   zfs_pkg="zfs-0.6.5.8-unRAID6.3.rc6.x86_64.tgz"
@@ -358,10 +370,10 @@ elif [ "$version" == "6.1.9" ]; then
 else
   echo ""
   echo "Unsupported kernel detected! This version of OpenZFS only works for"
-  echo "unRAID version 6.1.9 - 6.2.4 (and 6.3.rc3,rc6)"
+  echo "unRAID version 6.1.9 - 6.2.4 (and 6.3.rc3,rc6,rc9)"
   echo ""
   /usr/local/emhttp/plugins/dynamix/scripts/notify -e "ZFS not installed!" -s "Unsupported kernel detected!" -d "Supported versions are: 
-unRAID 6.1.9 - 6.2.4 (and 6.3.rc3) " -i "alert"
+unRAID 6.1.9 - 6.2.4 (and 6.3.rc3,rc6,rc9) " -i "alert"
   exit 1
 fi
 
