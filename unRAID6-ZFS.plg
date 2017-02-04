@@ -21,6 +21,7 @@
 ###2017.02.04
 - Updated to 6.3 (kernel 4.9.7)
 - Downgrade to spl and zfs 0.6.5.9 instead of 0.7.0rc3 for unRAID 6.3 and 6.3rc9
+- Remove 6.3 release candidate support
 
 ###2017.01.22
 - Updated to 6.3rc9 (kernel 4.9.6)
@@ -313,30 +314,6 @@ if [[ $kernel_version == *"4.9.7-unRAID"* ]]; then
   spl_md5="def09840c69e72d72a54cd0f6a2d66ec"
   zfs_pkg="zfs-0.6.5.9-unRAID6.3.x86_64.tgz"
   zfs_md5="80920cdc149a0f68f23ecb6d5501dbca"
-  supported_kernel=true
-
-# Version 6.3.rc9
-elif [[ $kernel_version == *"4.9.6-unRAID"* ]]; then
-  spl_pkg="spl-0.6.5.9-unRAID6.3.rc9.x86_64.tgz"
-  spl_md5="25de4983d09cbc1135cecec790ea462f"
-  zfs_pkg="zfs-0.6.5.9-unRAID6.3.rc9.x86_64.tgz"
-  zfs_md5="caf2408ad3b796944a086b1a495a6499"
-  supported_kernel=true
-
-# Version 6.3.rc6
-elif [[ $kernel_version == *"4.8.12-unRAID"* ]]; then
-  spl_pkg="spl-0.6.5.8-unRAID6.3.rc6.x86_64.tgz"
-  spl_md5="9307f1689041e007881942109ecf4af0"
-  zfs_pkg="zfs-0.6.5.8-unRAID6.3.rc6.x86_64.tgz"
-  zfs_md5="302913342001dfe7269951982d63c9d5"
-  supported_kernel=true
-
-# Version 6.3.rc3                              
-elif [[ $kernel_version == *"4.8.4-unRAID"* ]]; then
-  spl_pkg="spl-0.6.5.8-unRAID6.3.rc3.x86_64.tgz"
-  spl_md5="9cead5d122bdd75e95b14b6ba764ede9"
-  zfs_pkg="zfs-0.6.5.8-unRAID6.3.rc3.x86_64.tgz"
-  zfs_md5="e6125c443ff8fdc060ab51d1d5f8b976"
   supported_kernel=true
 
 # Version 6.2.4
