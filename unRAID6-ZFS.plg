@@ -4,7 +4,7 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "unRAID6-ZFS">
   <!ENTITY author    "jshridha">
-  <!ENTITY version   "0.4.8">
+  <!ENTITY version   "0.5.0">
   <!ENTITY repo      "https://raw.githubusercontent.com/&author;/unRAID6-ZFS/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -18,6 +18,9 @@
 >
 
 <CHANGES>
+###2017.02.04
+- Updated to 6.3 (kernel 4.9.7)
+- Downgrade to spl and zfs 0.6.5.9 instead of 0.7.0rc3 for unRAID 6.3 and 6.3rc9
 
 ###2017.01.22
 - Updated to 6.3rc9 (kernel 4.9.6)
@@ -304,12 +307,20 @@ download_install() {
   fi
 }
 
+# Version 6.3
+if [[ $kernel_version == *"4.9.7-unRAID"* ]]; then
+  spl_pkg="spl-0.6.5.9-unRAID6.3.x86_64.tgz"
+  spl_md5="def09840c69e72d72a54cd0f6a2d66ec"
+  zfs_pkg="zfs-0.6.5.9-unRAID6.3.x86_64.tgz"
+  zfs_md5="80920cdc149a0f68f23ecb6d5501dbca"
+  supported_kernel=true
+
 # Version 6.3.rc9
-if [[ $kernel_version == *"4.9.6-unRAID"* ]]; then
-  spl_pkg="spl-0.7.0-rc3-unRAID6.3.rc9.x86_64.tgz"
-  spl_md5="36ea2c4cb9f6c6652184f35870c249dc"
-  zfs_pkg="zfs-0.7.0-rc3-unRAID6.3.rc9.x86_64.tgz"
-  zfs_md5="e78283fed9d50cecc9956226a46f15cb"
+elif [[ $kernel_version == *"4.9.6-unRAID"* ]]; then
+  spl_pkg="spl-0.6.5.9-unRAID6.3.rc9.x86_64.tgz"
+  spl_md5="25de4983d09cbc1135cecec790ea462f"
+  zfs_pkg="zfs-0.6.5.9-unRAID6.3.rc9.x86_64.tgz"
+  zfs_md5="caf2408ad3b796944a086b1a495a6499"
   supported_kernel=true
 
 # Version 6.3.rc6
